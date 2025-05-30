@@ -13,8 +13,8 @@ This is a simple Go project designed for practicing Test-Driven Development (TDD
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/go-calendar.git
-cd go-calendar
+git clone https://github.com/LewisDamy/go-calendar-tdd.git
+cd go-calendar-tdd
 ```
 
 2. Run the tests:
@@ -30,7 +30,7 @@ go test ./...
 
 ## Project Structure
 ```
-go-calendar/
+go-calendar-tdd/
 ├── pkg/date/          # Date logic
 │   └── date.go
 ├── calendar.go        # Example functions
