@@ -3,40 +3,69 @@ package go_calendar
 import "github.com/lewisdamy/go-calendar-tdd/pkg/date"
 
 type HolidayCalendar struct {
-	weekdayHolidays  []string
-	specificHolidays []date.Date
+	holidays []Holiday
+}
+
+type Holiday interface {
+	Equals(date.Date) bool
+}
+
+type DayOfWeekHoliday struct {
+	dayOfWeek string
+}
+
+type SpecificDateHoliday struct {
+	specificDate date.Date
+}
+
+type DayOfMonthHoliday struct {
+	day   int
+	month int
 }
 
 func (c *HolidayCalendar) SetWeekdayHoliday(DayOfTheWeek string) {
-	c.weekdayHolidays = append(c.weekdayHolidays, DayOfTheWeek)
+	c.holidays = append(c.holidays, DayOfWeekHoliday{dayOfWeek: DayOfTheWeek})
 }
 
-func (c *HolidayCalendar) SetDateHoliday(year, month, day int) {
-	c.specificHolidays = append(c.specificHolidays, date.NewDate(year, month, day))
-}
-
-func (c *HolidayCalendar) SetDayOfMonthHoliday(month, day int) {
-
-}
-
-func (c *HolidayCalendar) isWeekdayHoliday(inputDate date.Date) bool {
-	for _, v := range c.weekdayHolidays {
-		if inputDate.Weekday() == v {
-			return true
-		}
+func (h DayOfWeekHoliday) Equals(inputDate date.Date) bool {
+	if inputDate.Weekday() == h.dayOfWeek {
+		return true
 	}
 	return false
 }
 
-func (c *HolidayCalendar) isSpecificHoliday(inputDate date.Date) bool {
-	for _, v := range c.specificHolidays {
-		if v == inputDate {
-			return true
-		}
+func (c *HolidayCalendar) SetDateHoliday(year, month, day int) {
+	c.holidays = append(c.holidays, SpecificDateHoliday{
+		specificDate: date.NewDate(year, month, day),
+	})
+}
+
+func (h SpecificDateHoliday) Equals(inputDate date.Date) bool {
+	if inputDate == h.specificDate {
+		return true
+	}
+	return false
+}
+
+func (c *HolidayCalendar) SetDayOfMonthHoliday(month, day int) {
+	c.holidays = append(c.holidays, DayOfMonthHoliday{
+		day:   day,
+		month: month,
+	})
+}
+
+func (h DayOfMonthHoliday) Equals(inputDate date.Date) bool {
+	if h.day == inputDate.Day() && h.month == inputDate.Month() {
+		return true
 	}
 	return false
 }
 
 func (c HolidayCalendar) IsHoliday(date date.Date) bool {
-	return c.isWeekdayHoliday(date) || c.isSpecificHoliday(date)
+	for _, v := range c.holidays {
+		if v.Equals(date) {
+			return true
+		}
+	}
+	return false
 }
