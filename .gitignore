@@ -1,0 +1,14 @@
+# Binaries
+*.exe
+*.out
+*.test
+
+# Vendor
+/vendor/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
