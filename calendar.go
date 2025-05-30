@@ -11,7 +11,7 @@ func (c *HolidayCalendar) SetWeekdayHoliday(DayOfTheWeek string) {
 	c.weekdayHolidays = append(c.weekdayHolidays, DayOfTheWeek)
 }
 
-func (c *HolidayCalendar) SetDayHoliday(year, month, day int) {
+func (c *HolidayCalendar) SetDateHoliday(year, month, day int) {
 	c.specificHolidays = append(c.specificHolidays, date.NewDate(year, month, day))
 }
 

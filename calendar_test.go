@@ -45,7 +45,7 @@ func TestSpecificHoliday(t *testing.T) {
 	c := HolidayCalendar{}
 	d := date.NewDate(2020, 1, 1)
 
-	c.SetDayHoliday(2020, 1, 1)
+	c.SetDateHoliday(2020, 1, 1)
 
 	if c.IsHoliday(d) != true {
 		t.Errorf("New years Date should be a holiday")
