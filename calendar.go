@@ -1,6 +1,6 @@
 package go_calendar
 
-import "github.com/lewisdamy/go-calendar/pkg/date"
+import "github.com/lewisdamy/go-calendar-tdd/pkg/date"
 
 type HolidayCalendar struct {
 	weekdayHolidays  []string

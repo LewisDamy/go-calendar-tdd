@@ -1,7 +1,7 @@
 package go_calendar
 
 import (
-	"github.com/lewisdamy/go-calendar/pkg/date"
+	"github.com/lewisdamy/go-calendar-tdd/pkg/date"
 	"testing"
 )
 
